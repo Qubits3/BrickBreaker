@@ -16,7 +16,7 @@ public class BlockSpawner : MonoBehaviour
         {
             for (var i = 0; i < 5; i++)
             {
-                for (var j = 0; j < Random.Range(4, 7); j++)
+                for (var j = 0; j < 9; j++)
                 {
                     var block = ObjectPooler.SharedInstance.GetPooledObject();
                     block.transform.position = new Vector3(_locX, _locY);

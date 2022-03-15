@@ -99,6 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 300
+  brickHit: {fileID: 8300000, guid: 77d58c2c0d0444f39b22aa27dabad355, type: 3}
+  ballHit: {fileID: 8300000, guid: bfbbdd51adfea6247b4c50eb8da387a5, type: 3}
+  platformHit: {fileID: 8300000, guid: fc550a8220c33b84f9edaabe704bfa81, type: 3}
 --- !u!50 &5909938018150306018
 Rigidbody2D:
   serializedVersion: 4

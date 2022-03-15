@@ -1,9 +1,17 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+public class Player : MonoBehaviour, ISoundEffect
 {
     private GameObject _ball;
+    
+    private AudioSource _audioSource;
+    
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     private void Start()
     {
@@ -29,5 +37,10 @@ public class Player : MonoBehaviour
         {
             _ball.GetComponent<Rigidbody2D>().simulated = true;
         }
+    }
+
+    public void PlaySound()
+    {
+        _audioSource.Play();
     }
 }

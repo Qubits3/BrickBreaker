@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 15.0f;
+    public float speed = 20.0f;
     private Touch _touch;
     [SerializeField] private float touchMovementSensitivity = 0.01f;
 
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
             if (_touch.phase == TouchPhase.Moved)
             {
                 var position = transform.position;
-                position = new Vector3(position.x + (-_touch.deltaPosition.x) * touchMovementSensitivity,
+                position = new Vector3(position.x + _touch.deltaPosition.x * touchMovementSensitivity,
                     position.y, position.z);
 
                 position.x = Mathf.Clamp(position.x, -4.2f, 4.2f);
