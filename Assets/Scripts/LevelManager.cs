@@ -1,16 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    private void Start()
+    public void RestartLevel()
     {
-        SpawnLevel();
-    }
-
-    private void SpawnLevel()
-    {
-        var level = Instantiate(Resources.Load<GameObject>("Prefabs/Level1"));
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

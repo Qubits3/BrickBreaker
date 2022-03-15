@@ -4,7 +4,15 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 20.0f;
     private Touch _touch;
-    [SerializeField] private float touchMovementSensitivity = 0.01f;
+    private const float Bound = 7.5f;
+    private Ball _ball;
+
+    private float touchMovementSensitivity = 0.025f;
+
+    private void Start()
+    {
+        _ball = GameObject.Find("Ball(Clone)").GetComponent<Ball>();
+    }
 
     private void Update()
     {
@@ -38,16 +46,19 @@ public class PlayerController : MonoBehaviour
                 position = new Vector3(position.x + _touch.deltaPosition.x * touchMovementSensitivity,
                     position.y, position.z);
 
-                position.x = Mathf.Clamp(position.x, -4.2f, 4.2f);
+                position.x = Mathf.Clamp(position.x, -Bound, Bound);
 
                 transform.position = position;
+            } else if (_touch.phase == TouchPhase.Ended)
+            {
+                _ball.ApplyInitialForce();
             }
         }
     }
 
     private void KeepInBounds(Vector3 transformPosition)
     {
-        transformPosition.x = Mathf.Clamp(transformPosition.x, -7.5f, 7.5f);
+        transformPosition.x = Mathf.Clamp(transformPosition.x, -Bound, Bound);
         transform.position = transformPosition;
     }
 }

@@ -1,13 +1,12 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour, ISoundEffect
 {
     private GameObject _ball;
-    
+
     private AudioSource _audioSource;
-    
+
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -15,27 +14,29 @@ public class Player : MonoBehaviour, ISoundEffect
 
     private void Start()
     {
-        _ball = PrefabUtility.InstantiatePrefab(Resources.Load<GameObject>("Prefabs/Ball")) as GameObject;
+        SpawnBall();
+    }
+
+    private void SpawnBall()
+    {
+        _ball = Instantiate(Resources.Load<GameObject>("Prefabs/Ball"));
 
         _ball!.transform.position = new Vector3(0, -4.06f);
-
-        // ConstraintSource constraintSource = default;
-        // if (ball != null)
-        // {
-        //     var parentConstraint = ball.AddComponent<ParentConstraint>();
-        //     constraintSource.sourceTransform = transform;
-        //     parentConstraint.AddSource(constraintSource);
-        //     parentConstraint.constraintActive = true;
-        //
-        //     ball.transform.position = new Vector3(0, -4.39f, 0);
-        // }
+        _ball!.transform.parent = transform;
     }
 
     private void Update()
     {
+        StartGame();
+    }
+
+    private void StartGame()
+    {
+        if (_ball.GetComponent<Rigidbody2D>().velocity != Vector2.zero) return;
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _ball.GetComponent<Rigidbody2D>().simulated = true;
+            _ball.GetComponent<Ball>().ApplyInitialForce();
         }
     }
 
