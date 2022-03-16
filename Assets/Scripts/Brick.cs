@@ -1,29 +1,29 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class Brick : MonoBehaviour, ISoundEffect, ICollisionManager
 {
     private AudioSource _audioSource;
-    private GameManager _gameManager;
 
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
     }
-
-    private void Start()
-    {
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-    }
-
+    
     public void PlaySound()
     {
         _audioSource.Play();
     }
 
-    public void OnBallCollided(GameObject collidedObject)
+    public IEnumerator OnBallCollided(GameObject collidedObject)
     {
-        _gameManager.AddScore();
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+        yield return new WaitForSeconds(0.2f);
+
+        GameManager.SharedInstance.AddScore();
         gameObject.SetActive(false);
     }
 }

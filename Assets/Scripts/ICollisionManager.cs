@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public interface ICollisionManager
 {
-        void OnBallCollided(GameObject collidedObject);
+    IEnumerator OnBallCollided(GameObject collidedObject);
 }

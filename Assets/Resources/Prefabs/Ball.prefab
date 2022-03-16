@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5909938018150306031}
   - component: {fileID: 5909938018150306018}
   - component: {fileID: 5909938018150306019}
-  - component: {fileID: 7181020916962311892}
+  - component: {fileID: 7401609038095683205}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -136,7 +136,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.54
---- !u!82 &7181020916962311892
+--- !u!82 &7401609038095683205
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

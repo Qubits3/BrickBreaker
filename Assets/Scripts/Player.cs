@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour, ISoundEffect
@@ -14,15 +15,18 @@ public class Player : MonoBehaviour, ISoundEffect
 
     private void Start()
     {
-        SpawnBall();
+        GetBallReference();
     }
 
-    private void SpawnBall()
+    private void GetBallReference()
     {
-        _ball = Instantiate(Resources.Load<GameObject>("Prefabs/Ball"));
-
-        _ball!.transform.position = new Vector3(0, -4.06f);
-        _ball!.transform.parent = transform;
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.name.Equals("Ball"))
+            {
+                _ball = child.gameObject;
+            }
+        }
     }
 
     private void Update()

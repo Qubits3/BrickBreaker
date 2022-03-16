@@ -1,13 +1,14 @@
-using System;
 using UnityEngine;
 
 public class BrickManager : MonoBehaviour
 {
     private GameObject _bundle;
+    private LevelManager _levelManager;
 
-    void Start()
+    private void Start()
     {
         _bundle = GameObject.FindWithTag("BrickBundle");
+        _levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     private void Update()
@@ -25,9 +26,10 @@ public class BrickManager : MonoBehaviour
                 brickCount++;
             }
         }
-        
-        print(brickCount);
-    }
 
-    
+        if (brickCount == 0)
+        {
+            _levelManager.LoadNextLevel();
+        }
+    }
 }

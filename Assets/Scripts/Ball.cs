@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
     public void ApplyInitialForce()
     {
         if (_rigidbody.velocity != Vector2.zero) return;
-        
+
         gameObject.transform.parent = null;
         _rigidbody.AddRelativeForce((Vector3.up + Vector3.right) * speed);
     }
@@ -22,7 +22,7 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         collision.gameObject.GetComponent<ISoundEffect>().PlaySound();
-
-        collision.gameObject.GetComponent<ICollisionManager>().OnBallCollided(gameObject);
+        
+        StartCoroutine(collision.gameObject.GetComponent<ICollisionManager>().OnBallCollided(gameObject));
     }
 }

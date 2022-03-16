@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private const float Bound = 7.5f;
     private Ball _ball;
 
-    private float touchMovementSensitivity = 0.025f;
+    private const float TouchMovementSensitivity = 0.025f;
 
     private void Start()
     {
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
             if (_touch.phase == TouchPhase.Moved)
             {
                 var position = transform.position;
-                position = new Vector3(position.x + _touch.deltaPosition.x * touchMovementSensitivity,
+                position = new Vector3(position.x + _touch.deltaPosition.x * TouchMovementSensitivity,
                     position.y, position.z);
 
                 position.x = Mathf.Clamp(position.x, -Bound, Bound);
