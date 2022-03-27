@@ -14,7 +14,7 @@ namespace Editor
             UpdateBrickLocation();
         }
 
-        public void UpdateBrickLocation()
+        private void UpdateBrickLocation()
         {
             var transformPosition = transform.position;
             transformPosition.y = BrickHeight * (column - 1);

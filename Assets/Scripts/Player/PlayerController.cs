@@ -7,14 +7,8 @@ namespace Player
         public float speed = 20.0f;
         private Touch _touch;
         private const float Bound = 7.5f;
-        private Ball _ball;
 
         private const float TouchMovementSensitivity = 0.025f;
-
-        private void Start()
-        {
-            _ball = GameObject.Find("Ball(Clone)").GetComponent<Ball>();
-        }
 
         private void Update()
         {
@@ -22,7 +16,7 @@ namespace Player
             KeyboardControl();
             TouchControl();
 #elif UNITY_ANDROID
-        TouchControl();
+            TouchControl();
 #endif
         }
 
@@ -51,9 +45,6 @@ namespace Player
                     position.x = Mathf.Clamp(position.x, -Bound, Bound);
 
                     transform.position = position;
-                } else if (_touch.phase == TouchPhase.Ended)
-                {
-                    _ball.ApplyInitialForce();
                 }
             }
         }

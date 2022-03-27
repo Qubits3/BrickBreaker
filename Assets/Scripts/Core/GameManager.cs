@@ -37,6 +37,8 @@ namespace Core
 
         public void DecreaseLife()
         {
+            Handheld.Vibrate();
+            
             _life--;
 
             _uiHandler.SetLifeText(_life);

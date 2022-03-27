@@ -40,7 +40,7 @@ namespace Player
         {
             if (_ball.GetComponent<Rigidbody2D>().velocity != Vector2.zero) return;
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetTouch(0).phase == TouchPhase.Ended)
             {
                 _ball.GetComponent<Ball>().ApplyInitialForce();
             }

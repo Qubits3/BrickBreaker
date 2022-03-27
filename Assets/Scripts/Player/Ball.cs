@@ -6,20 +6,13 @@ namespace Player
     public class Ball : MonoBehaviour
     {
         [SerializeField] private float speed = 1.0f;
-
-        private Rigidbody2D _rigidbody;
-
-        private void Awake()
-        {
-            _rigidbody = GetComponent<Rigidbody2D>();
-        }
-
+        
         public void ApplyInitialForce()
         {
-            if (_rigidbody.velocity != Vector2.zero) return;
+            if (GetComponent<Rigidbody2D>().velocity != Vector2.zero) return;
 
             gameObject.transform.parent = null;
-            _rigidbody.AddRelativeForce((Vector3.up + Vector3.right) * speed);
+            GetComponent<Rigidbody2D>().AddRelativeForce((Vector3.up + Vector3.right) * speed);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
