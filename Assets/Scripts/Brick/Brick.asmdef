@@ -1,0 +1,17 @@
+{
+    "name": "Brick",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d1c04d96bcaf0734e8189a3e9375a997",
+        "GUID:0c2e7865ecb044ed9dafe8d38bf966ce"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: 63a52dfb055be41d381cb2afc4fc8a1b
-labels:
-- Advance
-- Bricksgame
-- 2d
-- 2dgames
-- Bricks
-- Bricksbreakout
+guid: b0eed8661cb034c7a9f8aaf0d098dcb3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
