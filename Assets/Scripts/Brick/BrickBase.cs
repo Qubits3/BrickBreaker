@@ -9,19 +9,26 @@ namespace Brick
     public abstract class BrickBase : MonoBehaviour, ISoundEffect, ICollisionManager
     {
         [SerializeField] private Sprite[] sprites;
-        
+
         private int _brickLevel;
         private AudioSource _audioSource;
         private SpriteRenderer _spriteRenderer;
         private BoxCollider2D _boxCollider2D;
 
+        private BrickManager _brickManager;
+
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _boxCollider2D = gameObject.GetComponent<BoxCollider2D>();
-            
+            _boxCollider2D = GetComponent<BoxCollider2D>();
+
             _brickLevel = SetBrickLevel();
+        }
+
+        private void Start()
+        {
+            _brickManager = GameObject.Find("BrickManager").GetComponent<BrickManager>();
         }
 
         public void PlaySound()
@@ -33,7 +40,7 @@ namespace Brick
         {
             _brickLevel--;
 
-            if (_brickLevel <= 0)
+            if (_brickLevel == 0)
             {
                 _spriteRenderer.enabled = false;
                 _boxCollider2D.enabled = false;
@@ -41,21 +48,22 @@ namespace Brick
                 yield return new WaitForSeconds(0.2f);
 
                 GameManager.SharedInstance.AddScore();
+
                 gameObject.SetActive(false);
-            } else if (_brickLevel == 1)
+
+                _brickManager.DecreaseBrickCount();
+            }
+            else
             {
                 SetBrickSprite();
-                GameManager.SharedInstance.AddScore();
-            } else if (_brickLevel == 2)
-            {
-                SetBrickSprite();
-                GameManager.SharedInstance.AddScore();
             }
         }
 
         private void SetBrickSprite()
         {
             GetComponent<SpriteRenderer>().sprite = sprites[_brickLevel - 1];
+
+            GameManager.SharedInstance.AddScore();
         }
 
         protected abstract int SetBrickLevel();

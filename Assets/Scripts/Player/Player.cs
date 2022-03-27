@@ -40,10 +40,22 @@ namespace Player
         {
             if (_ball.GetComponent<Rigidbody2D>().velocity != Vector2.zero) return;
 
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetTouch(0).phase == TouchPhase.Ended)
+#if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                _ball.GetComponent<Ball>().ApplyInitialForce();
+                MakeBallMove();
             }
+#elif UNITY_ANDROID
+            if (Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                MakeBallMove();
+            }
+#endif
+        }
+
+        private void MakeBallMove()
+        {
+            _ball.GetComponent<Ball>().ApplyInitialForce();
         }
 
         public void PlaySound()

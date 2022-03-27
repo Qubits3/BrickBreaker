@@ -40,15 +40,15 @@ namespace Core
             Handheld.Vibrate();
             
             _life--;
-
-            _uiHandler.SetLifeText(_life);
-        
-            RespawnPlayer();
-
+            
             if (_life == 0)
             {
                 _levelManager.RestartLevel();
             }
+
+            _uiHandler.SetLifeText(_life);
+        
+            RespawnPlayer();
         }
 
         private void RespawnPlayer()

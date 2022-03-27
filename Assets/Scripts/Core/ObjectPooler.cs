@@ -1,45 +1,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooler : MonoBehaviour
+namespace Core
 {
-    public static ObjectPooler SharedInstance { get; private set; }
-    private List<GameObject> _pooledObjects;
-    public GameObject objectToPool;
-    public int amountToPool;
-
-    private void Awake()
+    public class ObjectPooler : MonoBehaviour
     {
-        if (SharedInstance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        
-        SharedInstance = this;
-    }
+        public static ObjectPooler SharedInstance { get; private set; }
+        private List<GameObject> _pooledObjects;
+        public GameObject objectToPool;
+        public int amountToPool;
 
-    private void Start()
-    {
-        _pooledObjects = new List<GameObject>();
-        for (var i = 0; i < amountToPool; i++)
+        private void Awake()
         {
-            var pooledObject = Instantiate(objectToPool, transform, false);
-            pooledObject.SetActive(false);
-            _pooledObjects.Add(pooledObject);
-        }
-    }
-
-    public GameObject GetPooledObject()
-    {
-        foreach (var pooledObject in _pooledObjects)
-        {
-            if (!pooledObject.activeInHierarchy)
+            if (SharedInstance != null)
             {
-                return pooledObject;
+                Destroy(gameObject);
+                return;
+            }
+        
+            SharedInstance = this;
+        }
+
+        private void Start()
+        {
+            _pooledObjects = new List<GameObject>();
+            for (var i = 0; i < amountToPool; i++)
+            {
+                var pooledObject = Instantiate(objectToPool, transform, false);
+                pooledObject.SetActive(false);
+                _pooledObjects.Add(pooledObject);
             }
         }
 
-        return null;
+        public GameObject GetPooledObject()
+        {
+            foreach (var pooledObject in _pooledObjects)
+            {
+                if (!pooledObject.activeInHierarchy)
+                {
+                    return pooledObject;
+                }
+            }
+
+            return null;
+        }
     }
 }

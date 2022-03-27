@@ -23,7 +23,7 @@ namespace Player
         private void KeyboardControl()
         {
             var transformPosition = transform.position;
-            KeepInBounds(transformPosition);
+            KeepThePlayerInBounds(transformPosition);
 
             var horizontalInput = Input.GetAxis("Horizontal");
 
@@ -49,7 +49,7 @@ namespace Player
             }
         }
 
-        private void KeepInBounds(Vector3 transformPosition)
+        private void KeepThePlayerInBounds(Vector3 transformPosition)
         {
             transformPosition.x = Mathf.Clamp(transformPosition.x, -Bound, Bound);
             transform.position = transformPosition;

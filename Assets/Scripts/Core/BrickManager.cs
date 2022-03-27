@@ -6,32 +6,38 @@ namespace Core
     {
         private GameObject _bundle;
         private LevelManager _levelManager;
+        private int _brickCount;
 
         private void Start()
         {
             _bundle = GameObject.FindWithTag("BrickBundle");
             _levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+
+            GetBrickCount();
         }
 
-        private void Update()
+        private void CheckBrickCount()
         {
-            CheckBricks();
+            if (_brickCount != 0) return;
+
+            _levelManager.LoadNextLevel();
         }
 
-        private void CheckBricks()
+        public void DecreaseBrickCount()
         {
-            var brickCount = 0;
+            _brickCount--;
+
+            CheckBrickCount();
+        }
+
+        private void GetBrickCount()
+        {
             foreach (Transform child in _bundle.transform)
             {
                 if (child.gameObject.activeInHierarchy)
                 {
-                    brickCount++;
+                    _brickCount++;
                 }
-            }
-
-            if (brickCount == 0)
-            {
-                _levelManager.LoadNextLevel();
             }
         }
     }
