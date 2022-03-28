@@ -13,10 +13,7 @@ namespace Player
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
-        }
-
-        private void Start()
-        {
+            
             GetBallReference();
         }
 

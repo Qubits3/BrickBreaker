@@ -9,7 +9,7 @@ namespace Core
         private LevelManager _levelManager;
         [SerializeField] private int _brickCount;
 
-        private void Start()
+        private void Awake()
         {
             _bundle = GameObject.FindWithTag("BrickBundle");
             _levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();

@@ -22,13 +22,10 @@ namespace Brick
             _audioSource = GetComponent<AudioSource>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _boxCollider2D = GetComponent<BoxCollider2D>();
+            
+            _brickManager = GameObject.Find("BrickManager").GetComponent<BrickManager>();
 
             _brickLevel = SetBrickLevel();
-        }
-
-        private void Start()
-        {
-            _brickManager = GameObject.Find("BrickManager").GetComponent<BrickManager>();
         }
 
         public void PlaySound()

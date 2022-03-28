@@ -25,10 +25,12 @@ namespace Editor
 
             if (GUILayout.Button("Spawn Essentials"))
             {
-                Spawn("Prefabs/Bounds");
-                Spawn("Prefabs/Managers");
-                Spawn("Prefabs/UI");
-                Spawn("Prefabs/Player");
+                SpawnPrefab("Prefabs/Bounds");
+                SpawnPrefab("Prefabs/Managers");
+                SpawnPrefab("Prefabs/UI");
+                SpawnPrefab("Prefabs/Player");
+
+                SpawnBrickBundle();
 
                 SetSkyboxMaterial();
             }
@@ -51,6 +53,21 @@ namespace Editor
             }
         }
 
+        private static void SpawnBrickBundle()
+        {
+            var bundleName = $"Level{SceneManager.GetActiveScene().buildIndex}Bricks";
+
+            if (!GameObject.Find(bundleName))
+            {
+                var bundle = new GameObject(bundleName)
+                {
+                    tag = "BrickBundle"
+                };
+
+                EditorUtility.SetDirty(bundle);
+            }
+        }
+
         private void SetSkyboxMaterial()
         {
             if (RenderSettings.skybox != Resources.Load<Material>("Materials/M_SolidSkybox"))
@@ -60,7 +77,7 @@ namespace Editor
             }
         }
 
-        private void Spawn(string path)
+        private void SpawnPrefab(string path)
         {
             if (!GameObject.Find(Resources.Load(path).name))
             {

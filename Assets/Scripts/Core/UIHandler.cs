@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Core
 {
@@ -7,11 +8,15 @@ namespace Core
     {
         private TMP_Text _scoreText;
         private TMP_Text _lifeText;
+        private TMP_Text _levelText;
 
-        private void Start()
+        private void Awake()
         {
             _scoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
             _lifeText = GameObject.Find("LifeText").GetComponent<TMP_Text>();
+            _levelText = GameObject.Find("LevelText").GetComponent<TMP_Text>();
+
+            _levelText.text = $"Level: {SceneManager.GetActiveScene().buildIndex}";
         }
 
         public void SetScoreText(int score)

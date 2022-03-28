@@ -51,17 +51,25 @@ namespace Core
             }
         }
 
+        private void ResetData()
+        {
+            var data = new Data
+            {
+                lastFinishedLevel = 0
+            };
+            
+            var json = JsonUtility.ToJson(data);
+            File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+        }
+
         private void Awake()
         {
             SharedInstance = this;
-
-            LoadData();
-        }
-
-        private void Start()
-        {
+            
             _uiHandler = GameObject.Find("UIHandler").GetComponent<UIHandler>();
             _levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+
+            LoadData();
         }
 
         public void AddScore()
@@ -92,6 +100,13 @@ namespace Core
 
             var newPlayer = Instantiate(Resources.Load<GameObject>("Prefabs/Player"));
             newPlayer.transform.position = new Vector3(0, -4.591f);
+        }
+
+        public void StartNewGame()
+        {
+            ResetData();
+
+            SceneManager.LoadScene(0);
         }
     }
 }
