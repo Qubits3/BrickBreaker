@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Core
 {
@@ -6,19 +7,24 @@ namespace Core
     {
         private GameObject _bundle;
         private LevelManager _levelManager;
-        private int _brickCount;
+        [SerializeField] private int _brickCount;
 
         private void Start()
         {
             _bundle = GameObject.FindWithTag("BrickBundle");
             _levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
-            GetBrickCount();
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+            {
+                GetBrickCount();   
+            }
         }
 
         private void CheckBrickCount()
         {
             if (_brickCount != 0) return;
+
+            GameManager.SharedInstance.SaveData();
 
             _levelManager.LoadNextLevel();
         }

@@ -1,4 +1,7 @@
+using System;
+using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Core
 {
@@ -12,15 +15,47 @@ namespace Core
         private int _score;
         private int _life = 3;
 
+        public int LastFinishedLevel { get; private set; }
+
+        [Serializable]
+        private class Data
+        {
+            public int lastFinishedLevel;
+        }
+
+        public void SaveData()
+        {
+            var data = new Data
+            {
+                lastFinishedLevel = SceneManager.GetActiveScene().buildIndex
+            };
+
+            var json = JsonUtility.ToJson(data);
+            File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+        }
+
+        private void LoadData()
+        {
+            var path = Application.persistentDataPath + "/savefile.json";
+
+            if (File.Exists(path))
+            {
+                var json = File.ReadAllText(path);
+                var data = JsonUtility.FromJson<Data>(json);
+
+                LastFinishedLevel = data.lastFinishedLevel;
+            }
+            else
+            {
+                LastFinishedLevel = 0;
+            }
+        }
+
         private void Awake()
         {
-            if (SharedInstance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
             SharedInstance = this;
+
+            LoadData();
         }
 
         private void Start()
@@ -38,16 +73,16 @@ namespace Core
         public void DecreaseLife()
         {
             Handheld.Vibrate();
-            
+
             _life--;
-            
+
             if (_life == 0)
             {
                 _levelManager.RestartLevel();
             }
 
             _uiHandler.SetLifeText(_life);
-        
+
             RespawnPlayer();
         }
 

@@ -7,7 +7,7 @@ namespace Core
     {
         public void RestartLevel()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         public void LoadNextLevel()
@@ -15,9 +15,19 @@ namespace Core
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
+        public void LoadLastFinishedLevel()
+        {
+            SceneManager.LoadScene(GameManager.SharedInstance.LastFinishedLevel + 1);
+        }
+
         public void QuitGame()
         {
             Application.Quit();
+        }
+
+        public void GoToMainMenu()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

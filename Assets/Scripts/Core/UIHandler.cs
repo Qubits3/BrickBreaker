@@ -23,5 +23,10 @@ namespace Core
         {
             _lifeText.text = $"Life: {life}";
         }
+
+        public void GoToMainMenu()
+        {
+            GameObject.Find("LevelManager").GetComponent<LevelManager>().GoToMainMenu();
+        }
     }
 }
