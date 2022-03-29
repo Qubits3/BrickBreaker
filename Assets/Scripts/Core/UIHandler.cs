@@ -9,6 +9,7 @@ namespace Core
         private TMP_Text _scoreText;
         private TMP_Text _lifeText;
         private TMP_Text _levelText;
+        [SerializeField] private GameObject pauseScreen;
 
         private void Awake()
         {
@@ -32,6 +33,18 @@ namespace Core
         public void GoToMainMenu()
         {
             GameObject.Find("LevelManager").GetComponent<LevelManager>().GoToMainMenu();
+        }
+
+        public void PauseGame()
+        {
+            Time.timeScale = 0;
+            pauseScreen.SetActive(true);
+        }
+
+        public void ResumeGame()
+        {
+            pauseScreen.SetActive(false);
+            Time.timeScale = 1;
         }
     }
 }

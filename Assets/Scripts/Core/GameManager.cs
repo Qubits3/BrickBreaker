@@ -65,11 +65,14 @@ namespace Core
         private void Awake()
         {
             SharedInstance = this;
-            
-            _uiHandler = GameObject.Find("UIHandler").GetComponent<UIHandler>();
-            _levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
             LoadData();
+        }
+
+        private void Start()
+        {
+            _uiHandler = GameObject.Find("UIHandler").GetComponent<UIHandler>();
+            _levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         }
 
         public void AddScore()
